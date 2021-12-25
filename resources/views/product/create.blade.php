@@ -4,6 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-4">
                 <form action="{{ route('products.store') }}" method="post">
+                    @csrf
                     <div class="form-group">
                          <label for="name" class="form-label">Name:</label>
                          <input type="text" class="form-control" name="name" id="name" placeholder="input name">
@@ -18,16 +19,16 @@
                           </div>
                           <div class="form-group">
                               <label for="name" class="form-label">Category:</label>
-                             <select name="category" id="{{ $category }}" class="form-control">
+                             <select name="category" class="form-control">
                                   @forelse ($category as $c)
-                                      <option value="{{ $c->id }}"></option>
+                                      <option value="{{ $c->id}}">{{$c->name}}</option>
                                   @empty
                                   <option value="{{ null }}" class="text text-danger">not data found</option>
                               @endforelse
                              </select>
                           </div>
                      <button type="submit" class="btn btn-primary">Save changes</button>
-                 </form>              
+                 </form>
             </div>
         </div>
     </div>
