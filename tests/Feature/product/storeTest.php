@@ -33,8 +33,18 @@ class createTest extends TestCase
         'description' =>'aa',
         'price'=>11
         ];
-        $response=$this->post(route('products.store',$products) );
+        $response=$this->post(route('products.store',$products));
         $this->assertDatabaseHas('products',$products);
     }
-
+    public function test_emptyInputs()
+    {
+        $this->artisan('db:seed', ['--class' => 'DatabaseSeeder']);
+        $products=[
+        'name' =>'',
+        'description' =>'',
+        'price'=>''
+        ];
+        $response=$this->post(route('products.store',$products));
+        $response->assertOk();
+    }
 }
