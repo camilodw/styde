@@ -17,9 +17,9 @@ class createTest extends TestCase
     {
         $this -> artisan('db:seed', ['--class' => 'DatabaseSeeder']);
         $products=[
-        'name' => 'aa',
-        'description' =>'aa',
-        'price' => 11
+        'name'          => 'aa',
+        'description'   => 'aa',
+        'price'         => 11
         ];
         $response = $this -> post(route('products.store',$products));
         $this -> assertDatabaseHas('products',$products);
