@@ -17,9 +17,9 @@ class updateTest extends TestCase
         $this->withoutExceptionHandling();
         $product = Product::factory()->create();
         $data = [
-            'name' => 'aa',
-            'description' => 'eee',
-            'price' =>1
+            'name'          => 'aa',
+            'description'   => 'eee',
+            'price'         =>1
         ];
         $this -> put("products/$product->id", $data)
               -> assertRedirect("/products");

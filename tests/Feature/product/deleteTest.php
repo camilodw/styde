@@ -14,17 +14,17 @@ class deleteTest extends TestCase
 
     public function test_destroy()
     {
-        $this->withoutExceptionHandling();
+        $this -> withoutExceptionHandling();
         $product = Product::factory()->create();
 
         $this
-            ->delete("products/$product->id")
-            ->assertRedirect('products');
+            -> delete("products/$product->id")
+            -> assertRedirect('products');
 
         $this->assertDatabaseMissing('products', [
-            'id' => $product->id,
-            'url' => $product->url,
-            'description' => $product->description,
+            'id'            => $product->id,
+            'url'           => $product->url,
+            'description'   => $product->description,
         ]);
     }
 
