@@ -6,24 +6,23 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-
+use App\Models\Product;
 class updateTest extends TestCase
 {
     use RefreshDatabase;
     use DatabaseMigrations;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
+
+    public function test_update()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
-    public function test_update(){
-
+        $this->withoutExceptionHandling();
+        $product = Product::factory()->create();
+        $data = [
+            'name' => 'aa',
+            'description' => 'eee',
+            'price' =>1
+        ];
+        $this -> put("products/$product->id", $data)
+              -> assertRedirect("/products");
+        $this -> assertDatabaseHas('products', $data);
     }
 }

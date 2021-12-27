@@ -10,16 +10,7 @@ class listTest extends TestCase
 {
     use RefreshDatabase;
     use DatabaseMigrations;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $response = $this->get('/');
-        $response->assertStatus(200);
-    }
+
     public function test_list()
     {
         $this -> seed();
@@ -31,10 +22,5 @@ class listTest extends TestCase
         $response -> assertSee('Description:');
 
     }
-
-
-
-
-
 
 }
