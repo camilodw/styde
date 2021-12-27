@@ -36,7 +36,7 @@ class createTest extends TestCase
         $response=$this->post(route('products.store',$products));
         $this->assertDatabaseHas('products',$products);
     }
-    public function test_emptyInputs()
+    public function test_validateInputs()
     {
         $this->artisan('db:seed', ['--class' => 'DatabaseSeeder']);
         $products=[
@@ -44,7 +44,8 @@ class createTest extends TestCase
         'description' =>'',
         'price'=>''
         ];
-        $response=$this->post(route('products.store',$products));
-        $response->assertOk();
+        //302 redirige a la misma pagina
+        $response=$this->post(route('products.store',$products)) ->assertStatus(302)
+        ->assertSessionHasErrors(['name', 'description','price']);
     }
 }
