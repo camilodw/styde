@@ -22,4 +22,8 @@ class updateTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_update(){
+
+    }
 }

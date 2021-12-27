@@ -17,16 +17,7 @@
                               <label for="price" class="form-label">Price:</label>
                               <input type="number" class="form-control" name="price" id="price" placeholder="input price">
                           </div>
-                          <div class="form-group">
-                              <label for="name" class="form-label">Category:</label>
-                             <select name="category" class="form-control">
-                                  @forelse ($category as $c)
-                                      <option value="{{ $c->id}}">{{$c->name}}</option>
-                                  @empty
-                                  <option value="{{ null }}" class="text text-danger">not data found</option>
-                              @endforelse
-                             </select>
-                          </div>
+
                      <button type="submit" class="btn btn-primary">Save changes</button>
                  </form>
             </div>

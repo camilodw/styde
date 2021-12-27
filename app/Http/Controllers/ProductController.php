@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\product\storeRequest;
 
@@ -27,8 +26,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-            $category=Category::all();
-        return view('product.create',compact('category'));
+
+        return view('product.create');
     }
 
     /**
@@ -39,7 +38,10 @@ class ProductController extends Controller
      */
     public function store(storeRequest $request)
     {
-        Product::create($request->all());
+        Product::create(['name'=>$request->name,
+        'description'=>$request->description,
+        'price'=>$request->price,
+        ]);
         return redirect()->route('products.index');
     }
 
@@ -62,6 +64,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+
         return view('product.edit',compact('product'));
     }
 
@@ -74,8 +77,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $product->update($request->all());
-        return redirect()->back()->with(['message'=>'updated succesfully']);
+        $product->update(['name'=>$request->name,
+            'price'=>$request->price,
+            'description'=>$request->description,
+        ]);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -87,6 +93,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('product.index');
+        return redirect()->route('products.index');
     }
 }

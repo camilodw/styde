@@ -17,7 +17,6 @@ class ProductFactory extends Factory
            'name'=>$this->faker->name(),
            'price'=>10000,
            'description'=>$this->faker->sentence(),
-           'category'=>1
         ];
     }
 }

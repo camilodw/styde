@@ -27,7 +27,6 @@ class storeRequest extends FormRequest
            'name'=>'required|string',
            'description'=>'required',
            'price'=>'required',
-           'category'=>'required'
-        ];
+            ];
     }
 }

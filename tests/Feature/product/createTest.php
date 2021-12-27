@@ -29,12 +29,11 @@ class createTest extends TestCase
     {
         $this->artisan('db:seed', ['--class' => 'DatabaseSeeder']);
         $products=[
-        'name' => 'a',
-        'price'=>1000,
-        'description'=>'aaa',
-        'category'=>1];
-        $response=$this->post(route('products.store',$products) )
-        ->assertRedirect('/products');
+        'name' =>'aa',
+        'description' =>'aa',
+        'price'=>11
+        ];
+        $response=$this->post(route('products.store',$products) );
         $this->assertDatabaseHas('products',$products);
     }
 
