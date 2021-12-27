@@ -5,18 +5,27 @@ namespace Tests\Feature\product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Models\Product;
 class deleteTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $response = $this->get('/');
+    use RefreshDatabase;
+    use DatabaseMigrations;
 
-        $response->assertStatus(200);
+    public function test_destroy()
+    {
+        $this->withoutExceptionHandling();
+        $product = Product::factory()->create();
+
+        $this
+            ->delete("products/$product->id")
+            ->assertRedirect('products');
+
+        $this->assertDatabaseMissing('products', [
+            'id' => $product->id,
+            'url' => $product->url,
+            'description' => $product->description,
+        ]);
     }
+
 }

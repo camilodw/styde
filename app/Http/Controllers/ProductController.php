@@ -38,9 +38,10 @@ class ProductController extends Controller
      */
     public function store(storeRequest $request)
     {
-        Product::create(['name'=>$request->name,
-        'description'=>$request->description,
-        'price'=>$request->price,
+        Product::create([
+        'name'          => $request -> name,
+        'description'   => $request -> description,
+        'price'         => $request -> price,
         ]);
         return redirect()->route('products.index');
     }
@@ -77,11 +78,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $product->update(['name'=>$request->name,
-            'price'=>$request->price,
-            'description'=>$request->description,
+        $product -> update([
+            'name'          => $request->name,
+            'price'         => $request -> price,
+            'description'   => $request->description,
         ]);
-        return redirect()->route('products.index');
+        return redirect() -> route('products.index');
     }
 
     /**
@@ -92,7 +94,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
-        return redirect()->route('products.index');
+        $product -> delete();
+        return redirect() -> route('products.index');
     }
 }

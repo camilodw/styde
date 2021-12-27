@@ -16,9 +16,9 @@ class validateTest extends TestCase
     {
         $this -> artisan('db:seed', ['--class' => 'DatabaseSeeder']);
         $products=[
-        'name' =>'',
-        'description' =>'',
-        'price'=>''
+        'name'          => '',
+        'description'   => '',
+        'price'         => ''
         ];
         //302 redirige a la misma pagina
         $response = $this -> post(route('products.store',$products))
