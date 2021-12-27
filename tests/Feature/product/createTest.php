@@ -7,10 +7,12 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Product;
 use App\Models\Category;
-
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 class createTest extends TestCase
 {
     use RefreshDatabase;
+    use DatabaseMigrations;
+
     /**
      * A basic feature test example.
      *
@@ -20,19 +22,20 @@ class createTest extends TestCase
     {
         $response = $this->get('/');
 
-        $response->assertStatus(200);
+        $response -> assertStatus(200);
     }
 
-    function test_create()
+    public function test_store()
     {
-        $this->handleValidationExceptions();
-         Category::factory()->create();
-
-        $this->post('/products/', [
-                'name' => '',
-                'price'=>'',
-                'description'=>'',
-                'category_id'=>''
-        ])->assertStatus(402);
+        $this->artisan('db:seed', ['--class' => 'DatabaseSeeder']);
+        $products=[
+        'name' => 'a',
+        'price'=>1000,
+        'description'=>'aaa',
+        'category'=>1];
+        $response=$this->post(route('products.store',$products) )
+        ->assertRedirect('/products');
+        $this->assertDatabaseHas('products',$products);
     }
+
 }

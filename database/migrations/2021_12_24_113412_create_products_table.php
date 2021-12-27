@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->integer('price');
             $table->text('description');
-            $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->unsignedBigInteger('category')->nullable();
+            $table->foreign('category')->references('id')->on('categories');
         });
     }
 
